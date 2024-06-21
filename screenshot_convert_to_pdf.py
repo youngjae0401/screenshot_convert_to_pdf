@@ -139,18 +139,19 @@ class ConvertPdfApp(QWidget):
         print(f"x, y coordinates set to: ({self.bottom_right_x}, {self.bottom_right_y})")
 
     def run_screenshot_to_pdf(self):
-        # 좌표 및 PDF 파일명 확인
+        # 좌표 확인
         if (not self.left_x_input.text().strip() or not self.left_y_input.text().strip() or not self.right_x_input.text().strip() or not self.right_y_input.text().strip()):
             QMessageBox.warning(self, '입력 오류', '좌상단 및 우하단 좌표를 설정하세요.')
             return
 
-        # 다음 페이지 버튼 설정
+        # 다음 페이지 버튼 설정 확인
         selected_button = self.radio_group.checkedButton()
         if selected_button is None:
             QMessageBox.warning(self, '입력 오류', '방향 버튼을 선택하세요.')
             return
         button_to_click = selected_button.text()
 
+        # PDF 파일명 확인
         pdf_filename = self.pdf_input.text()
         if not pdf_filename:
             QMessageBox.warning(self, '입력 오류', 'PDF 파일명을 입력하세요.')
@@ -170,7 +171,7 @@ class ConvertPdfApp(QWidget):
         self.take_screenshot_and_convert_to_pdf(self.left_x_input.text(), self.left_y_input.text(), self.right_x_input.text(), self.right_y_input.text(), button_to_click, pdf_filename)
 
     def take_screenshot_and_convert_to_pdf(self, top_left_x, top_left_y, bottom_right_x, bottom_right_y, button, pdf_filename):
-        # 카운트다운 추가
+        # 카운트다운 시작
         for i in range(self.count_down, 0, -1):
             print(f"{i}초 후 스크린샷을 시작합니다.")
             time.sleep(1)
