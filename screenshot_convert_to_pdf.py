@@ -1,4 +1,4 @@
-# 라이브러리 설치
+# 관련 패키지 설치
 # pip install pyautogui pillow reportlab pyinstaller PyQt5
 
 import sys
