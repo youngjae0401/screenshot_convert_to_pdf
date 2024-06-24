@@ -1,4 +1,4 @@
-<img width="100%" alt="screenshot" src="https://github.com/youngjae0401/screenshot_convert_to_pdf/assets/106523863/2cb95a8d-ba3c-4db4-bf55-9047977ab3dc">
+<img width="100%" alt="r1" src="https://github.com/youngjae0401/screenshot_convert_to_pdf/assets/106523863/8ac6c429-6842-46cc-81cf-c3602a88679a">
 
 * * *
 
@@ -16,13 +16,16 @@
 3. 우하단 좌표 설정 버튼 클릭
 4. 마우스를 우하단 좌표 지점으로 이동 후 기다린다. (x, y 좌표가 input 값으로 들어가는데 디테일하게 수정해도 무방하다.)
 5. 다음 페이지 방향키를 선택한다. (* 보통 아래 또는 오른쪽이겠죠?)
-6. 생성될 PDF 파일명을 입력한다.
-7. 총 페이지 수를 입력한다. (대량일 경우 이미지가 그만큼 생성되기 때문에 용량을 확인 후에 작업하길 바란다.)
-8. PDF 파일 만들기 버튼 클릭
+6. 파일이 생성될 경로를 선택한다.
+7. 생성될 PDF 파일명을 입력한다.
+8. 총 페이지 수를 입력한다. (대량일 경우 이미지가 그만큼 생성되기 때문에 용량을 확인 후에 작업하길 바란다.)
+9. PDF 파일 만들기 버튼 클릭
 
 해당 프로그램은 다음 페이지를 키보드로 컨트롤할 때만 가능하다. <br><br>
 마우스로 컨트롤이 필요한 경우 직접 만들어보기를 바란다.
 
-<br>
+* * *
 
-> python 및 관련 패키지 설치 후 파일을 실행하면 된다. (.exe 파일로 변환해서 사용해도 될 것 같다.)
+<img width="100%" alt="r2" src="https://github.com/youngjae0401/screenshot_convert_to_pdf/assets/106523863/5d0de0f6-3f3a-4ba1-8611-32e62e4fc467">
+<img width="100%" alt="r3" src="https://github.com/youngjae0401/screenshot_convert_to_pdf/assets/106523863/a18bcf2b-c1ed-4d02-9828-0d6773d2140f">
+<img width="100%" alt="r4" src="https://github.com/youngjae0401/screenshot_convert_to_pdf/assets/106523863/67f6342e-ba84-46c1-a16d-1fd5c7180422">
