@@ -2,12 +2,13 @@
 # pip install pyautogui pillow reportlab pyinstaller PyQt5
 
 import sys
+import os
 import time
 import pyautogui
 from PIL import Image
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
-from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QRadioButton, QPushButton, QVBoxLayout, QHBoxLayout, QMessageBox, QButtonGroup, QDesktopWidget
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QLineEdit, QRadioButton, QPushButton, QVBoxLayout, QHBoxLayout, QMessageBox, QButtonGroup, QDesktopWidget, QFileDialog
 
 class ConvertPdfApp(QWidget):
     def __init__(self):
@@ -20,6 +21,7 @@ class ConvertPdfApp(QWidget):
         self.bottom_right_y = 0
         self.total_pages = 0
         self.current_page = 0
+        self.output_dir = ""
         self.initUI()
 
     def initUI(self):
@@ -54,6 +56,11 @@ class ConvertPdfApp(QWidget):
         self.radio_group.addButton(self.down_radio)
         self.radio_group.addButton(self.left_radio)
         self.radio_group.addButton(self.right_radio)
+
+        # 디렉토리 선택 버튼 및 경로 표시
+        self.dir_button = QPushButton('저장 경로 선택', self)
+        self.dir_button.clicked.connect(self.select_directory)
+        self.dir_label = QLabel('저장 경로가 선택되지 않았습니다.')
 
         # PDF 파일명 입력
         self.pdf_label = QLabel('PDF 파일명:')
@@ -94,6 +101,12 @@ class ConvertPdfApp(QWidget):
         button_layout.addWidget(self.left_radio)
         button_layout.addWidget(self.right_radio)
         layout.addLayout(button_layout)
+
+        # 디렉토리 선택 버튼 및 경로 표시 레이아웃
+        dir_layout = QHBoxLayout()
+        dir_layout.addWidget(self.dir_button)
+        dir_layout.addWidget(self.dir_label)
+        layout.addLayout(dir_layout)
 
         # PDF 파일명 입력 레이아웃
         pdf_layout = QHBoxLayout()
@@ -138,6 +151,12 @@ class ConvertPdfApp(QWidget):
         QMessageBox.information(self, '좌표 설정 완료', f'우하단 좌표가 ({self.bottom_right_x}, {self.bottom_right_y})로 설정되었습니다.')
         print(f"x, y coordinates set to: ({self.bottom_right_x}, {self.bottom_right_y})")
 
+    def select_directory(self):
+        self.output_dir = QFileDialog.getExistingDirectory(self, '저장 경로 선택', os.getenv('HOME'))
+        if self.output_dir:
+            self.dir_label.setText(f'저장 경로: {self.output_dir}')
+            QMessageBox.information(self, '경로 선택 완료', f'저장 경로가 {self.output_dir}로 설정되었습니다.')
+
     def run_screenshot_to_pdf(self):
         # 좌표 확인
         if (not self.left_x_input.text().strip() or not self.left_y_input.text().strip() or not self.right_x_input.text().strip() or not self.right_y_input.text().strip()):
@@ -150,6 +169,11 @@ class ConvertPdfApp(QWidget):
             QMessageBox.warning(self, '입력 오류', '방향 버튼을 선택하세요.')
             return
         button_to_click = selected_button.text()
+
+        # 저장 경로 확인
+        if not self.output_dir:
+            QMessageBox.warning(self, '입력 오류', '저장 경로를 선택하세요.')
+            return
 
         # PDF 파일명 확인
         pdf_filename = self.pdf_input.text()
@@ -184,7 +208,7 @@ class ConvertPdfApp(QWidget):
             self.current_page += 1
 
             # 스크린샷 파일명 설정
-            screenshot_filename = f'image_{self.current_page}.png'
+            screenshot_filename = os.path.join(self.output_dir, f'image_{self.current_page}.png')
 
             # 좌표 값을 정수로 변환
             top_left_x = int(top_left_x)
@@ -218,13 +242,14 @@ class ConvertPdfApp(QWidget):
         QMessageBox.information(self, '완료', f'{self.total_pages} 페이지가 완료되었습니다.')
 
     def convert_to_pdf(self, image_filenames, pdf_filename):
-        pdf = canvas.Canvas(pdf_filename, pagesize=letter)
+        pdf_path = os.path.join(self.output_dir, pdf_filename)
+        pdf = canvas.Canvas(pdf_path, pagesize=letter)
         for image_filename in image_filenames:
             image = Image.open(image_filename)
             pdf.drawImage(image_filename, 0, 0, width=letter[0], height=letter[1])
             pdf.showPage()
         pdf.save()
-        QMessageBox.information(self, '완료', f'PDF 파일이 {pdf_filename}으로 저장되었습니다.')
+        QMessageBox.information(self, '완료', f'PDF 파일이 {pdf_path}에 저장되었습니다.')
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
