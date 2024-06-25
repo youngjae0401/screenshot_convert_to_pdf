@@ -1,3 +1,0 @@
-([('screenshot_convert_to_pdf',
-   '/Users/joyoungjae/Documents/GitHub/screenshot_convert_to_pdf/dist/screenshot_convert_to_pdf',
-   'EXECUTABLE')],)
