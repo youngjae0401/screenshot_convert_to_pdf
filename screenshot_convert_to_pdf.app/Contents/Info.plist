@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>screenshot_convert_to_pdf</string>
+	<key>CFBundleExecutable</key>
+	<string>screenshot_convert_to_pdf</string>
+	<key>CFBundleIconFile</key>
+	<string>generated-17f29c6c7ab63425fe4febceabf47081f4c160cf80ef62239702134ac0bc76ea.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>screenshot_convert_to_pdf</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>screenshot_convert_to_pdf</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.0.0</string>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+</dict>
+</plist>
